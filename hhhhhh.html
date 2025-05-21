@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SFX CAPITAL - News ad Alto Impatto</title>
+    <title><strong>SFX CAPITAL - News ad Alto Impatto</strong></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -15,16 +15,16 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 0;
+            padding: 0; /* Rimosso padding dal body, gestito dal container e header */
         }
         .site-container {
             width: 100%;
-            max-width: 960px;
-            padding: 0 1rem;
-            margin-top: 2rem;
+            max-width: 960px; /* Larghezza massima per il contenuto principale */
+            padding: 0 1rem; /* Padding laterale per il container */
+            margin-top: 2rem; /* Spazio per l'header fisso */
         }
         .page-section {
-            display: none;
+            display: none; /* Nascoste di default, mostrate da JS */
             width: 100%;
             animation: fadeIn 0.5s ease-out;
         }
@@ -35,57 +35,58 @@
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         .site-header {
             width: 100%;
-            background-color: rgba(10, 25, 47, 0.85);
-            padding: 1rem 0;
+            background-color: rgba(10, 25, 47, 0.85); 
+            padding: 1rem 0; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             border-bottom: 1px solid rgba(0, 128, 255, 0.15);
-            position: sticky;
+            position: sticky; 
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px); 
         }
         .header-content {
             max-width: 960px;
             margin: 0 auto;
             padding: 0 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-wrap: wrap; 
         }
         .logo-container {
-            margin-right: 15px;
+            margin-right: 15px; 
         }
         .header-logo {
-            height: 50px;
-            width: auto;
-            max-width: 150px;
-            border-radius: 4px;
-            object-fit: contain;
+            height: 50px; 
+            width: auto; 
+            max-width: 150px; 
+            border-radius: 4px; 
+            object-fit: contain; 
         }
         .header-text-content {
-            text-align: left;
+            text-align: left; 
         }
         .header-title {
-            font-size: 2.2rem;
+            font-size: 2.2rem; 
             font-weight: 800;
             color: #61dafb;
             text-shadow: 0 0 8px rgba(97, 218, 251, 0.3);
-            margin-bottom: 0.1rem;
+            margin-bottom: 0.1rem; 
             line-height: 1.1;
         }
         .header-subtitle {
-            font-size: 1rem;
+            font-size: 1rem; 
             color: #a0aec0;
-            margin-bottom: 0;
+            margin-bottom: 0; 
             line-height: 1.2;
         }
         .nav-controls {
-            width: 100%;
+            width: 100%; 
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 1rem; 
         }
         .nav-controls button {
             background-color: rgba(0, 123, 255, 0.7);
@@ -96,7 +97,7 @@
             transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
             border: 1px solid rgba(0, 123, 255, 0.9);
             box-shadow: 0 3px 10px rgba(0, 123, 255, 0.25);
-            margin: 0.3rem 0.5rem;
+            margin: 0.3rem 0.5rem; 
         }
         .nav-controls button:hover {
             background-color: rgba(0, 86, 179, 0.8);
@@ -104,10 +105,12 @@
             box-shadow: 0 5px 15px rgba(0, 123, 255, 0.35);
         }
         .nav-controls button.active-nav {
-            background-color: #004080;
+            background-color: #004080; 
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.1);
             transform: translateY(0px);
         }
+
+        /* Stili per la sezione di pubblicazione */
         .publish-container {
             background-color: rgba(10, 25, 47, 0.85);
             padding: 2rem 2.5rem;
@@ -115,7 +118,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(0, 128, 255, 0.2);
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0 auto; /* Centra il form */
         }
         .form-label {
             display: block;
@@ -166,6 +169,8 @@
             text-align: center;
             font-weight: 500;
         }
+
+        /* Stili per la sezione di visualizzazione news */
         .news-feed-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -219,7 +224,7 @@
         }
         .site-footer {
             width: 100%;
-            margin-top: auto;
+            margin-top: auto; /* Spinge il footer in basso */
             padding: 1.5rem 1rem;
             font-size: 0.85rem;
             color: #718096;
@@ -234,7 +239,7 @@
         <div class="header-content">
             <div class="logo-container">
                 <img src="data:image/jpeg;base64,SEZIONE_BASE64_DEL_TUO_LOGO_QUI" alt="Logo SFX Capital" class="header-logo"
-                     onerror="this.style.display='none'; console.error('Errore caricamento logo Base64 o stringa non inserita.')">
+                     onerror="this.style.display='none'; console.error('Errore caricamento logo Base64 o stringa non inserita/percorso file errato.')">
             </div>
             <div class="header-text-content">
                 <h1 class="header-title"><strong>SFX CAPITAL</strong></h1>
@@ -249,7 +254,8 @@
 
     <div class="site-container">
         <section id="view-news-page" class="page-section">
-            <div id="newsFeedContainer" class="news-feed-grid"></div>
+            <div id="newsFeedContainer" class="news-feed-grid">
+                </div>
             <p id="noNewsMessage" class="no-news-info" style="display: none;"><strong>Nessuna notizia trovata. Prova a pubblicarne qualcuna!</strong></p>
         </section>
 
@@ -285,6 +291,7 @@
         const publishPage = document.getElementById('publish-page');
         const viewNewsBtn = document.getElementById('viewNewsBtn');
         const publishNewsBtn = document.getElementById('publishNewsBtn');
+        
         const newsFeedContainer = document.getElementById('newsFeedContainer');
         const noNewsEl = document.getElementById('noNewsMessage');
         const publishForm = document.getElementById('publishNewsForm');
@@ -303,7 +310,7 @@
             } else if (pageIdToShow === 'publish-page') {
                 publishPage.classList.add('active');
                 publishNewsBtn.classList.add('active-nav');
-                if(document.getElementById('newsHeadline')) {
+                if(document.getElementById('newsHeadline')) { 
                     document.getElementById('newsHeadline').focus();
                 }
             }
@@ -321,13 +328,13 @@
         }
 
         function displayNewsFeed() {
-            newsFeedContainer.innerHTML = '';
+            newsFeedContainer.innerHTML = ''; 
 
             const preloadedNewsItem = {
-                id: 'preloaded-' + Date.now(),
+                id: 'preloaded-' + Date.now(), 
                 timestamp: new Date(Date.now() - 7200 * 1000).toISOString(),
                 headline: "<strong>US House Speaker Johnson: We came to $40,000 SALT deduction cap agreement.</strong>",
-                details: "US House Speaker Johnson announced an agreement on a $40,000 cap for SALT (State and Local Tax) deductions. This development could have significant implications for taxpayers [...]"
+                details: "US House Speaker Johnson announced an agreement on a $40,000 cap for SALT (State and Local Tax) deductions. This development could have significant implications for taxpayers in high-tax states."
             };
 
             let allNews = [preloadedNewsItem];
@@ -337,20 +344,21 @@
             } catch (e) {
                 console.error("Errore nel parsing delle news da localStorage:", e);
             }
-
+            
             const uniqueNewsMap = new Map();
             allNews.forEach(item => {
-                if(item && item.id) {
+                if(item && item.id) { 
                    uniqueNewsMap.set(item.id, item);
                 }
             });
             const uniqueNews = Array.from(uniqueNewsMap.values());
 
+
             if (uniqueNews.length === 0) {
                 if(noNewsEl) noNewsEl.style.display = 'block';
                 return;
             }
-
+            
             if(noNewsEl) noNewsEl.style.display = 'none';
 
             uniqueNews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -397,18 +405,19 @@
                  console.error("Errore nel salvataggio delle news in localStorage:", e);
             }
 
+
             publishForm.reset();
             if(successMessage) successMessage.style.display = 'block';
             setTimeout(() => {
                 if(successMessage) successMessage.style.display = 'none';
-                showPage('view-news-page');
-            }, 1500);
+                showPage('view-news-page'); 
+            }, 1500); 
         });
-
+        
         if(document.getElementById('currentYear')) {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
         }
-
+        
         showPage('view-news-page');
     </script>
 </body>
