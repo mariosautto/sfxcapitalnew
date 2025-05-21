@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><strong>SFX CAPITAL - News ad Alto Impatto</strong></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 70%, #2c5364 100%);
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0; /* Rimosso padding dal body, gestito dal container e header */
+        }
+        .site-container {
+            width: 100%;
+            max-width: 960px; /* Larghezza massima per il contenuto principale */
+            padding: 0 1rem; /* Padding laterale per il container */
+            margin-top: 2rem; /* Spazio per l'header fisso */
+        }
+        .page-section {
+            display: none; /* Nascoste di default, mostrate da JS */
+            width: 100%;
+            animation: fadeIn 0.5s ease-out;
+            /* margin-top: 2rem; Rimosso perché .site-container ora ha margin-top */
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .site-header {
+            width: 100%;
+            background-color: rgba(10, 25, 47, 0.85); /* Sfondo header semi-trasparente, leggermente più opaco */
+            padding: 1rem 0; /* Ridotto padding verticale per header */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(0, 128, 255, 0.15);
+            position: sticky; /* Header fisso in alto */
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px); /* Aumentato blur */
+        }
+        .header-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex; /* Per allineare logo e titolo */
+            align-items: center; /* Allinea verticalmente logo e titolo */
+            justify-content: center; /* Centra il blocco logo+titolo se c'è spazio */
+            flex-wrap: wrap; /* Permette al testo di andare a capo se necessario */
+        }
+        .logo-container {
+            margin-right: 15px; /* Spazio tra logo e titolo */
+        }
+        .header-logo {
+            height: 50px; /* Altezza del logo */
+            width: auto; /* Larghezza automatica per mantenere le proporzioni */
+            max-width: 150px; /* Larghezza massima per il logo */
+            border-radius: 4px; /* Angoli leggermente arrotondati se il logo è quadrato */
+            object-fit: contain; /* Assicura che il logo si adatti senza distorsioni */
+        }
+        .header-text-content {
+            text-align: left; /* Allinea il testo a sinistra rispetto al logo */
+        }
+        .header-title {
+            font-size: 2.2rem; /* Leggermente ridotto per fare spazio al logo */
+            font-weight: 800;
+            color: #61dafb;
+            text-shadow: 0 0 8px rgba(97, 218, 251, 0.3);
+            margin-bottom: 0.1rem; /* Ridotto margin bottom */
+            line-height: 1.1;
+        }
+        .header-subtitle {
+            font-size: 1rem; /* Leggermente ridotto */
+            color: #a0aec0;
+            margin-bottom: 0; /* Rimosso margin bottom dal sottotitolo */
+            line-height: 1.2;
+        }
+        .nav-controls {
+            width: 100%; /* Occupa tutta la larghezza per centrare i bottoni sotto */
+            text-align: center;
+            margin-top: 1rem; /* Spazio sopra i bottoni di navigazione */
+        }
+        .nav-controls button {
+            background-color: rgba(0, 123, 255, 0.7);
+            color: white;
+            font-weight: 600;
+            padding: 0.65rem 1.3rem;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(0, 123, 255, 0.9);
+            box-shadow: 0 3px 10px rgba(0, 123, 255, 0.25);
+            margin: 0.3rem 0.5rem; /* Aggiunto margin verticale per wrap */
+        }
+        .nav-controls button:hover {
+            background-color: rgba(0, 86, 179, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.35);
+        }
+        .nav-controls button.active-nav {
+            background-color: #004080; /* Blu più scuro e solido per attivo */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.1);
+            transform: translateY(0px);
+        }
+
+        /* Stili per la sezione di pubblicazione */
+        .publish-container {
+            background-color: rgba(10, 25, 47, 0.85);
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 128, 255, 0.2);
+            max-width: 700px;
+            margin: 0 auto; /* Centra il form */
+        }
+        .form-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #cbd5e0;
+            margin-bottom: 0.6rem;
+        }
+        .form-input, .form-textarea {
+            width: 100%;
+            background-color: rgba(45, 55, 72, 0.7);
+            border: 1px solid rgba(74, 85, 104, 0.8);
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            font-size: 1rem;
+        }
+        .form-input:focus, .form-textarea:focus {
+            border-color: #61dafb;
+            box-shadow: 0 0 0 3px rgba(97, 218, 251, 0.25);
+            outline: none;
+        }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 0.9rem 0;
+            border-radius: 8px;
+            transition: filter 0.2s ease, transform 0.1s ease;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        .btn-submit:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+        .success-message {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1rem;
+            background-color: rgba(45, 206, 137, 0.15);
+            border: 1px solid rgba(45, 206, 137, 0.5);
+            color: #2dce89;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Stili per la sezione di visualizzazione news */
+        .news-feed-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+        }
+        .news-card {
+            background-color: rgba(23, 42, 70, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 128, 255, 0.15);
+            overflow: hidden;
+            transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+            border-left: 5px solid #e53e3e;
+        }
+        .news-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 12px 35px rgba(0, 123, 255, 0.3), 0 0 0 1px rgba(97, 218, 251, 0.3);
+        }
+        .news-card-header {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.8) 0%, rgba(0, 123, 255, 0.7) 100%);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(0, 128, 255, 0.2);
+        }
+        .news-card-headline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+        .news-card-body {
+            padding: 1.5rem;
+        }
+        .news-card-details {
+            font-size: 1rem;
+            color: #c5d6e0;
+            line-height: 1.6;
+        }
+        .news-card-timestamp {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 1.2rem;
+            text-align: right;
+        }
+        .no-news-info {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #a0aec0;
+            padding: 3rem 1rem;
+            background-color: rgba(10, 25, 47, 0.7);
+            border-radius: 10px;
+            border: 1px dashed rgba(0, 128, 255, 0.2);
+        }
+        .site-footer {
+            width: 100%;
+            margin-top: auto; /* Spinge il footer in basso */
+            padding: 1.5rem 1rem;
+            font-size: 0.85rem;
+            color: #718096;
+            text-align: center;
+            background-color: rgba(10, 25, 47, 0.7);
+            border-top: 1px solid rgba(0, 128, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="data:image/jpeg;base64,SEZIONE_BASE64_DEL_TUO_LOGO_QUI" alt="Logo SFX Capital" class="header-logo"
+                     onerror="this.style.display='none'; console.error('Errore caricamento logo Base64 o stringa non inserita.')">
+            </div>
+            <div class="header-text-content">
+                <h1 class="header-title"><strong>SFX CAPITAL</strong></h1>
+                <p class="header-subtitle"><strong>News ad Alto Impatto</strong></p>
+            </div>
+            <nav class="nav-controls">
+                <button id="viewNewsBtn"><strong>Visualizza News</strong></button>
+                <button id="publishNewsBtn"><strong>Pubblica News</strong></button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="site-container">
+        <section id="view-news-page" class="page-section">
+            <div id="newsFeedContainer" class="news-feed-grid">
+                </div>
+            <p id="noNewsMessage" class="no-news-info" style="display: none;"><strong>Nessuna notizia trovata. Prova a pubblicarne qualcuna!</strong></p>
+        </section>
+
+        <section id="publish-page" class="page-section">
+            <div class="publish-container text-center">
+                <h2 class="text-2xl font-bold text-blue-300 mb-6"><strong>Crea una Nuova Notizia</strong></h2>
+                <form id="publishNewsForm" class="space-y-6 text-left">
+                    <div>
+                        <label for="newsHeadline" class="form-label"><strong>Titolo della Notizia:</strong></label>
+                        <input type="text" id="newsHeadline" name="headline" class="form-input" required>
+                    </div>
+                    <div>
+                        <label for="newsDetails" class="form-label"><strong>Dettagli della Notizia:</strong></label>
+                        <textarea id="newsDetails" name="details" rows="6" class="form-textarea" required></textarea>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="btn-submit"><strong>Pubblica Ora</strong></button>
+                    </div>
+                </form>
+                <div id="successMessage" class="success-message">
+                    <strong>Notizia pubblicata con successo!</strong>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="currentYear"></span> <strong>SFX CAPITAL Mockup</strong>. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        const viewNewsPage = document.getElementById('view-news-page');
+        const publishPage = document.getElementById('publish-page');
+        const viewNewsBtn = document.getElementById('viewNewsBtn');
+        const publishNewsBtn = document.getElementById('publishNewsBtn');
+        
+        const newsFeedContainer = document.getElementById('newsFeedContainer');
+        const noNewsEl = document.getElementById('noNewsMessage');
+        const publishForm = document.getElementById('publishNewsForm');
+        const successMessage = document.getElementById('successMessage');
+
+        function showPage(pageIdToShow) {
+            viewNewsPage.classList.remove('active');
+            publishPage.classList.remove('active');
+            viewNewsBtn.classList.remove('active-nav');
+            publishNewsBtn.classList.remove('active-nav');
+
+            if (pageIdToShow === 'view-news-page') {
+                viewNewsPage.classList.add('active');
+                viewNewsBtn.classList.add('active-nav');
+                displayNewsFeed();
+            } else if (pageIdToShow === 'publish-page') {
+                publishPage.classList.add('active');
+                publishNewsBtn.classList.add('active-nav');
+                if(document.getElementById('newsHeadline')) { // Controlla se l'elemento esiste
+                    document.getElementById('newsHeadline').focus();
+                }
+            }
+        }
+
+        viewNewsBtn.addEventListener('click', () => showPage('view-news-page'));
+        publishNewsBtn.addEventListener('click', () => showPage('publish-page'));
+
+        function formatNewsTimestamp(isoString) {
+            const date = new Date(isoString);
+            return date.toLocaleString('it-IT', {
+                day: '2-digit', month: 'short', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        function displayNewsFeed() {
+            newsFeedContainer.innerHTML = ''; // Pulisce il feed
+
+            const preloadedNewsItem = {
+                id: 'preloaded-' + Date.now(), // Assicura ID univoco per sessione
+                timestamp: new Date(Date.now() - 7200 * 1000).toISOString(),
+                headline: "<strong>US House Speaker Johnson: We came to $40,000 SALT deduction cap agreement.</strong>",
+                details: "US House Speaker Johnson announced an agreement on a $40,000 cap for SALT (State and Local Tax) deductions. This development could have significant implications for taxpayers in high-tax states."
+            };
+
+            let allNews = [preloadedNewsItem];
+            try {
+                const storedNews = JSON.parse(localStorage.getItem('sfxNewsList')) || [];
+                allNews = allNews.concat(storedNews);
+            } catch (e) {
+                console.error("Errore nel parsing delle news da localStorage:", e);
+                // localStorage.removeItem('sfxNewsList'); // Opzionale: pulisci localStorage se corrotto
+            }
+            
+            const uniqueNewsMap = new Map();
+            allNews.forEach(item => {
+                if(item && item.id) { // Assicurati che l'item e l'ID esistano
+                   uniqueNewsMap.set(item.id, item);
+                }
+            });
+            const uniqueNews = Array.from(uniqueNewsMap.values());
+
+
+            if (uniqueNews.length === 0) {
+                if(noNewsEl) noNewsEl.style.display = 'block';
+                return;
+            }
+            
+            if(noNewsEl) noNewsEl.style.display = 'none';
+
+            uniqueNews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            uniqueNews.forEach(news => {
+                const card = document.createElement('article');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <div class="news-card-header">
+                        <h2 class="news-card-headline">${news.headline}</h2>
+                    </div>
+                    <div class="news-card-body">
+                        <p class="news-card-details">${news.details}</p>
+                        <p class="news-card-timestamp">Pubblicato: ${formatNewsTimestamp(news.timestamp)}</p>
+                    </div>
+                `;
+                newsFeedContainer.appendChild(card);
+            });
+        }
+
+        publishForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const headline = document.getElementById('newsHeadline').value;
+            const details = document.getElementById('newsDetails').value;
+
+            const newNewsItem = {
+                id: 'user-' + Date.now(),
+                timestamp: new Date().toISOString(),
+                headline: headline,
+                details: details
+            };
+
+            let newsList = [];
+            try {
+                newsList = JSON.parse(localStorage.getItem('sfxNewsList')) || [];
+            } catch (e) {
+                console.error("Errore nel parsing delle news da localStorage prima del salvataggio:", e);
+            }
+            newsList.push(newNewsItem);
+            try {
+                localStorage.setItem('sfxNewsList', JSON.stringify(newsList));
+            } catch (e) {
+                 console.error("Errore nel salvataggio delle news in localStorage:", e);
+            }
+
+
+            publishForm.reset();
+            if(successMessage) successMessage.style.display = 'block';
+            setTimeout(() => {
+                if(successMessage) successMessage.style.display = 'none';
+                showPage('view-news-page'); // Passa alla visualizzazione news dopo il successo
+            }, 1500); // Breve ritardo per mostrare il messaggio
+        });
+        
+        if(document.getElementById('currentYear')) {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        }
+        
+        // Mostra la pagina di visualizzazione news all'avvio
+        showPage('view-news-page');
+    </script>
+</body>
+</html>
