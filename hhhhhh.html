@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><strong>SFX CAPITAL - News ad Alto Impatto</strong></title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SFX CAPITAL - News ad Alto Impatto</title> <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
@@ -15,16 +14,17 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 0; /* Rimosso padding dal body, gestito dal container e header */
+            padding: 0; 
         }
         .site-container {
             width: 100%;
-            max-width: 960px; /* Larghezza massima per il contenuto principale */
-            padding: 0 1rem; /* Padding laterale per il container */
-            margin-top: 2rem; /* Spazio per l'header fisso */
+            max-width: 960px; 
+            padding: 0 1rem; 
+            margin-top: 1rem; /* Ridotto spazio per header fisso se necessario */
+            flex-grow: 1; /* Permette al container di crescere e spingere il footer in basso */
         }
         .page-section {
-            display: none; /* Nascoste di default, mostrate da JS */
+            display: none; 
             width: 100%;
             animation: fadeIn 0.5s ease-out;
         }
@@ -110,7 +110,6 @@
             transform: translateY(0px);
         }
 
-        /* Stili per la sezione di pubblicazione */
         .publish-container {
             background-color: rgba(10, 25, 47, 0.85);
             padding: 2rem 2.5rem;
@@ -118,7 +117,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(0, 128, 255, 0.2);
             max-width: 700px;
-            margin: 0 auto; /* Centra il form */
+            margin: 2rem auto; /* Aggiunto margin top/bottom per distanziarlo dall'header/footer */
         }
         .form-label {
             display: block;
@@ -170,11 +169,11 @@
             font-weight: 500;
         }
 
-        /* Stili per la sezione di visualizzazione news */
         .news-feed-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.8rem;
+            padding-bottom: 2rem; /* Spazio prima del footer */
         }
         .news-card {
             background-color: rgba(23, 42, 70, 0.9);
@@ -224,7 +223,7 @@
         }
         .site-footer {
             width: 100%;
-            margin-top: auto; /* Spinge il footer in basso */
+            margin-top: auto; 
             padding: 1.5rem 1rem;
             font-size: 0.85rem;
             color: #718096;
@@ -238,17 +237,13 @@
     <header class="site-header">
         <div class="header-content">
             <div class="logo-container">
-                <img src="data:image/jpeg;base64,SEZIONE_BASE64_DEL_TUO_LOGO_QUI" alt="Logo SFX Capital" class="header-logo"
-                     onerror="this.style.display='none'; console.error('Errore caricamento logo Base64 o stringa non inserita/percorso file errato.')">
+                <img src="https://placehold.co/150x50/0A192F/61DAFB?text=SFX+Logo&font=inter" alt="Logo SFX Capital" class="header-logo"
+                     onerror="this.style.display='none'; console.error('Errore caricamento logo: Controlla URL o stringa Base64.')">
             </div>
             <div class="header-text-content">
-                <h1 class="header-title"><strong>SFX CAPITAL</strong></h1>
-                <p class="header-subtitle"><strong>News ad Alto Impatto</strong></p>
-            </div>
+                <h1 class="header-title">SFX CAPITAL</h1> <p class="header-subtitle">News ad Alto Impatto</p> </div>
             <nav class="nav-controls">
-                <button id="viewNewsBtn"><strong>Visualizza News</strong></button>
-                <button id="publishNewsBtn"><strong>Pubblica News</strong></button>
-            </nav>
+                <button id="viewNewsBtn">Visualizza News</button> <button id="publishNewsBtn">Pubblica News</button> </nav>
         </div>
     </header>
 
@@ -256,169 +251,194 @@
         <section id="view-news-page" class="page-section">
             <div id="newsFeedContainer" class="news-feed-grid">
                 </div>
-            <p id="noNewsMessage" class="no-news-info" style="display: none;"><strong>Nessuna notizia trovata. Prova a pubblicarne qualcuna!</strong></p>
-        </section>
+            <p id="noNewsMessage" class="no-news-info" style="display: none;">Nessuna notizia trovata. Prova a pubblicarne qualcuna!</p> </section>
 
         <section id="publish-page" class="page-section">
             <div class="publish-container text-center">
-                <h2 class="text-2xl font-bold text-blue-300 mb-6"><strong>Crea una Nuova Notizia</strong></h2>
-                <form id="publishNewsForm" class="space-y-6 text-left">
+                <h2 class="text-2xl font-bold text-blue-300 mb-6">Crea una Nuova Notizia</h2> <form id="publishNewsForm" class="space-y-6 text-left">
                     <div>
-                        <label for="newsHeadline" class="form-label"><strong>Titolo della Notizia:</strong></label>
-                        <input type="text" id="newsHeadline" name="headline" class="form-input" required>
+                        <label for="newsHeadline" class="form-label">Titolo della Notizia:</label> <input type="text" id="newsHeadline" name="headline" class="form-input" required>
                     </div>
                     <div>
-                        <label for="newsDetails" class="form-label"><strong>Dettagli della Notizia:</strong></label>
-                        <textarea id="newsDetails" name="details" rows="6" class="form-textarea" required></textarea>
+                        <label for="newsDetails" class="form-label">Dettagli della Notizia:</label> <textarea id="newsDetails" name="details" rows="6" class="form-textarea" required></textarea>
                     </div>
                     <div class="pt-2">
-                        <button type="submit" class="btn-submit"><strong>Pubblica Ora</strong></button>
-                    </div>
+                        <button type="submit" class="btn-submit">Pubblica Ora</button> </div>
                 </form>
                 <div id="successMessage" class="success-message">
-                    <strong>Notizia pubblicata con successo!</strong>
-                </div>
+                    Notizia pubblicata con successo! </div>
             </div>
         </section>
     </div>
 
     <footer class="site-footer">
-        <p>&copy; <span id="currentYear"></span> <strong>SFX CAPITAL Mockup</strong>. Tutti i diritti riservati.</p>
-    </footer>
+        <p>&copy; <span id="currentYear"></span> SFX CAPITAL Mockup. Tutti i diritti riservati.</p> </footer>
 
     <script>
-        const viewNewsPage = document.getElementById('view-news-page');
-        const publishPage = document.getElementById('publish-page');
-        const viewNewsBtn = document.getElementById('viewNewsBtn');
-        const publishNewsBtn = document.getElementById('publishNewsBtn');
-        
-        const newsFeedContainer = document.getElementById('newsFeedContainer');
-        const noNewsEl = document.getElementById('noNewsMessage');
-        const publishForm = document.getElementById('publishNewsForm');
-        const successMessage = document.getElementById('successMessage');
+        document.addEventListener('DOMContentLoaded', () => { // Esegui lo script dopo il caricamento del DOM
+            const viewNewsPage = document.getElementById('view-news-page');
+            const publishPage = document.getElementById('publish-page');
+            const viewNewsBtn = document.getElementById('viewNewsBtn');
+            const publishNewsBtn = document.getElementById('publishNewsBtn');
+            
+            const newsFeedContainer = document.getElementById('newsFeedContainer');
+            const noNewsEl = document.getElementById('noNewsMessage');
+            const publishForm = document.getElementById('publishNewsForm');
+            const successMessage = document.getElementById('successMessage');
+            const currentYearEl = document.getElementById('currentYear');
 
-        function showPage(pageIdToShow) {
-            viewNewsPage.classList.remove('active');
-            publishPage.classList.remove('active');
-            viewNewsBtn.classList.remove('active-nav');
-            publishNewsBtn.classList.remove('active-nav');
+            function showPage(pageIdToShow) {
+                if (viewNewsPage) viewNewsPage.classList.remove('active');
+                if (publishPage) publishPage.classList.remove('active');
+                if (viewNewsBtn) viewNewsBtn.classList.remove('active-nav');
+                if (publishNewsBtn) publishNewsBtn.classList.remove('active-nav');
 
-            if (pageIdToShow === 'view-news-page') {
-                viewNewsPage.classList.add('active');
-                viewNewsBtn.classList.add('active-nav');
-                displayNewsFeed();
-            } else if (pageIdToShow === 'publish-page') {
-                publishPage.classList.add('active');
-                publishNewsBtn.classList.add('active-nav');
-                if(document.getElementById('newsHeadline')) { 
-                    document.getElementById('newsHeadline').focus();
+                if (pageIdToShow === 'view-news-page') {
+                    if (viewNewsPage) viewNewsPage.classList.add('active');
+                    if (viewNewsBtn) viewNewsBtn.classList.add('active-nav');
+                    displayNewsFeed();
+                } else if (pageIdToShow === 'publish-page') {
+                    if (publishPage) publishPage.classList.add('active');
+                    if (publishNewsBtn) publishNewsBtn.classList.add('active-nav');
+                    const headlineInput = document.getElementById('newsHeadline');
+                    if (headlineInput) { 
+                        headlineInput.focus();
+                    }
                 }
             }
-        }
 
-        viewNewsBtn.addEventListener('click', () => showPage('view-news-page'));
-        publishNewsBtn.addEventListener('click', () => showPage('publish-page'));
+            if (viewNewsBtn) viewNewsBtn.addEventListener('click', () => showPage('view-news-page'));
+            if (publishNewsBtn) publishNewsBtn.addEventListener('click', () => showPage('publish-page'));
 
-        function formatNewsTimestamp(isoString) {
-            const date = new Date(isoString);
-            return date.toLocaleString('it-IT', {
-                day: '2-digit', month: 'short', year: 'numeric',
-                hour: '2-digit', minute: '2-digit'
-            });
-        }
-
-        function displayNewsFeed() {
-            newsFeedContainer.innerHTML = ''; 
-
-            const preloadedNewsItem = {
-                id: 'preloaded-' + Date.now(), 
-                timestamp: new Date(Date.now() - 7200 * 1000).toISOString(),
-                headline: "<strong>US House Speaker Johnson: We came to $40,000 SALT deduction cap agreement.</strong>",
-                details: "US House Speaker Johnson announced an agreement on a $40,000 cap for SALT (State and Local Tax) deductions. This development could have significant implications for taxpayers in high-tax states."
-            };
-
-            let allNews = [preloadedNewsItem];
-            try {
-                const storedNews = JSON.parse(localStorage.getItem('sfxNewsList')) || [];
-                allNews = allNews.concat(storedNews);
-            } catch (e) {
-                console.error("Errore nel parsing delle news da localStorage:", e);
-            }
-            
-            const uniqueNewsMap = new Map();
-            allNews.forEach(item => {
-                if(item && item.id) { 
-                   uniqueNewsMap.set(item.id, item);
+            function formatNewsTimestamp(isoString) {
+                try {
+                    const date = new Date(isoString);
+                    return date.toLocaleString('it-IT', {
+                        day: '2-digit', month: 'short', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+                } catch (e) {
+                    console.error("Errore formattazione timestamp:", e, isoString);
+                    return "Data non disponibile";
                 }
-            });
-            const uniqueNews = Array.from(uniqueNewsMap.values());
+            }
 
+            function displayNewsFeed() {
+                if (!newsFeedContainer || !noNewsEl) {
+                    console.error("Elementi del feed (newsFeedContainer o noNewsEl) non trovati nel DOM.");
+                    return;
+                }
+                newsFeedContainer.innerHTML = ''; 
 
-            if (uniqueNews.length === 0) {
-                if(noNewsEl) noNewsEl.style.display = 'block';
-                return;
+                const preloadedNewsItem = {
+                    id: 'preloaded-' + Date.now(), 
+                    timestamp: new Date(Date.now() - 7200 * 1000).toISOString(),
+                    headline: "US House Speaker Johnson: We came to $40,000 SALT deduction cap agreement.", // Rimosso <strong>
+                    details: "US House Speaker Johnson announced an agreement on a $40,000 cap for SALT (State and Local Tax) deductions. This development could have significant implications for taxpayers in high-tax states."
+                };
+
+                let allNews = [preloadedNewsItem];
+                try {
+                    const storedNewsRaw = localStorage.getItem('sfxNewsList');
+                    if (storedNewsRaw) {
+                        const storedNews = JSON.parse(storedNewsRaw);
+                        if (Array.isArray(storedNews)) {
+                           allNews = allNews.concat(storedNews);
+                        }
+                    }
+                } catch (e) {
+                    console.error("Errore nel parsing delle news da localStorage:", e);
+                }
+                
+                const uniqueNewsMap = new Map();
+                allNews.forEach(item => {
+                    if(item && typeof item === 'object' && item.id) { 
+                       uniqueNewsMap.set(item.id, item);
+                    }
+                });
+                const uniqueNews = Array.from(uniqueNewsMap.values());
+
+                if (uniqueNews.length === 0) {
+                    noNewsEl.style.display = 'block';
+                    return;
+                }
+                
+                noNewsEl.style.display = 'none';
+
+                uniqueNews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                uniqueNews.forEach(news => {
+                    const card = document.createElement('article');
+                    card.className = 'news-card';
+                    // Sanitizza l'headline e i details se necessario, qui si assume siano sicuri
+                    // o che verranno sanitizzati prima di essere salvati/mostrati se provengono da input utente non fidato.
+                    // Per questo esempio, li usiamo direttamente.
+                    card.innerHTML = `
+                        <div class="news-card-header">
+                            <h2 class="news-card-headline">${news.headline}</h2>
+                        </div>
+                        <div class="news-card-body">
+                            <p class="news-card-details">${news.details}</p>
+                            <p class="news-card-timestamp">Pubblicato: ${formatNewsTimestamp(news.timestamp)}</p>
+                        </div>
+                    `;
+                    newsFeedContainer.appendChild(card);
+                });
+            }
+
+            if (publishForm) {
+                publishForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const headlineInput = document.getElementById('newsHeadline');
+                    const detailsInput = document.getElementById('newsDetails');
+
+                    if (!headlineInput || !detailsInput) return; // Controllo aggiuntivo
+
+                    const headline = headlineInput.value;
+                    const details = detailsInput.value;
+
+                    const newNewsItem = {
+                        id: 'user-' + Date.now(),
+                        timestamp: new Date().toISOString(),
+                        headline: headline, // Il testo dell'utente non dovrebbe contenere HTML non sanitizzato
+                        details: details   // Stessa cosa qui
+                    };
+
+                    let newsList = [];
+                    try {
+                        const storedNewsRaw = localStorage.getItem('sfxNewsList');
+                        if (storedNewsRaw) {
+                            const parsedNews = JSON.parse(storedNewsRaw);
+                            if (Array.isArray(parsedNews)) {
+                                newsList = parsedNews;
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Errore nel parsing delle news da localStorage prima del salvataggio:", e);
+                    }
+                    newsList.push(newNewsItem);
+                    try {
+                        localStorage.setItem('sfxNewsList', JSON.stringify(newsList));
+                    } catch (e) {
+                         console.error("Errore nel salvataggio delle news in localStorage:", e);
+                    }
+
+                    publishForm.reset();
+                    if(successMessage) successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        if(successMessage) successMessage.style.display = 'none';
+                        showPage('view-news-page'); 
+                    }, 1500); 
+                });
             }
             
-            if(noNewsEl) noNewsEl.style.display = 'none';
-
-            uniqueNews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-            uniqueNews.forEach(news => {
-                const card = document.createElement('article');
-                card.className = 'news-card';
-                card.innerHTML = `
-                    <div class="news-card-header">
-                        <h2 class="news-card-headline">${news.headline}</h2>
-                    </div>
-                    <div class="news-card-body">
-                        <p class="news-card-details">${news.details}</p>
-                        <p class="news-card-timestamp">Pubblicato: ${formatNewsTimestamp(news.timestamp)}</p>
-                    </div>
-                `;
-                newsFeedContainer.appendChild(card);
-            });
-        }
-
-        publishForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const headline = document.getElementById('newsHeadline').value;
-            const details = document.getElementById('newsDetails').value;
-
-            const newNewsItem = {
-                id: 'user-' + Date.now(),
-                timestamp: new Date().toISOString(),
-                headline: headline,
-                details: details
-            };
-
-            let newsList = [];
-            try {
-                newsList = JSON.parse(localStorage.getItem('sfxNewsList')) || [];
-            } catch (e) {
-                console.error("Errore nel parsing delle news da localStorage prima del salvataggio:", e);
+            if(currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
             }
-            newsList.push(newNewsItem);
-            try {
-                localStorage.setItem('sfxNewsList', JSON.stringify(newsList));
-            } catch (e) {
-                 console.error("Errore nel salvataggio delle news in localStorage:", e);
-            }
-
-
-            publishForm.reset();
-            if(successMessage) successMessage.style.display = 'block';
-            setTimeout(() => {
-                if(successMessage) successMessage.style.display = 'none';
-                showPage('view-news-page'); 
-            }, 1500); 
+            
+            showPage('view-news-page'); // Mostra la pagina iniziale
         });
-        
-        if(document.getElementById('currentYear')) {
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-        }
-        
-        showPage('view-news-page');
     </script>
 </body>
 </html>
